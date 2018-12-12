@@ -5,17 +5,17 @@ using NUnit.Framework;
 namespace UnitTests
 {
     [TestFixture]
-    public class WhenTestingThingy
+    public class WhenTestingFizzBuzz
     {
-        private Thingy _thingy;
+        private FizzBuzz _fizzbuzz;
         private string _result;
 
         [SetUp]
         public void Setup()
         {
-            _thingy = new Thingy();
+            _fizzbuzz = new FizzBuzz();
 
-            _result = _thingy.DoTheThing();
+            _result = _fizzbuzz.RunFizzBuzz();
         }
 
         [Test]
