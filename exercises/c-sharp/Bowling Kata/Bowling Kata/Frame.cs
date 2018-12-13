@@ -18,6 +18,7 @@ namespace BowlingKata
         public bool HasStrike { get => Rolls.Count > 0 && Rolls.First() == strikeScore; }
         public bool HasSpare { get => !HasStrike && Rolls.Sum() == maxScore; }
         public bool Complete { get => Rolls.Count >= maxRolls || HasStrike; }
+        public int NumberOfRolls { get => Rolls.Count; }
 
         public void Roll(int pinsKnocked)
         {

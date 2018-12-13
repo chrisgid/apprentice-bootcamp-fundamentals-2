@@ -52,24 +52,56 @@ namespace BowlingKata
         private int FrameScore(int frameIndex)
         {
             var frame = frames[frameIndex];
-            bool hasSpare = frame.HasSpare;
-            bool hasStrike = frame.HasStrike;
+            int score = frame.TotalValue;
 
-            if (hasStrike)
+            if (frame.HasStrike)
             {
-                int score = frame.TotalValue
-                            + frames[frameIndex + 1].RollValue(1)
-                            + frames[frameIndex + 1].RollValue(2);
+                score += frames[frameIndex + 1].RollValue(1)
+                       + frames[frameIndex + 1].RollValue(2);
+
                 return score;
             }
-            else if (hasSpare)
+            else if (frame.HasSpare)
             {
-                int score = frame.TotalValue
-                            + frames[frameIndex + 1].RollValue(1);
+                score += frames[frameIndex + 1].RollValue(1);
                 return score;
             }
 
-            return frame.TotalValue;
+            return score;
+        }
+
+        private int GetNextRollValue(int frameIndex)
+        {
+            switch (frames[frameIndex + 1].NumberOfRolls)
+            {
+                case 0:
+                    return ScoreNotCalculable;
+                default:
+                    return frames[frameIndex + 1].RollValue(1);
+            }
+        }
+
+        private int GetNextTwoRollValues(int frameIndex)
+        {
+            switch (frames[frameIndex + 1].NumberOfRolls)
+            {
+                case 0:
+                    return ScoreNotCalculable;
+                case 1:
+                    int nextNextValue = GetNextRollValue(frameIndex + 1);
+                    if (nextNextValue == ScoreNotCalculable)
+                    {
+                        return ScoreNotCalculable;
+                    }
+                    else
+                    {
+                        return nextNextValue + frames[frameIndex + 1].RollValue(1);
+                    }
+                case 2:
+                    return frames[frameIndex + 1].RollValue(1) + frames[frameIndex + 1].RollValue(2);
+                default:
+                    return ScoreNotCalculable;
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace BowlingKata
         bool HasStrike { get; }
         bool HasSpare { get; }
         bool Complete { get; }
+        int NumberOfRolls { get; }
 
         void Roll(int pinsKnocked);
         int RollValue(int rollNumber);

@@ -54,5 +54,16 @@ namespace BowlingKataTests
             Assert.That(table.TotalScore, Is.EqualTo(50));
             Assert.That(table.CurrentFrame, Is.EqualTo(5));
         }
+
+        [Test]
+        public void CanScoreTwoStrikesInARowCorrectly()
+        {
+            table.Roll(10);
+            table.Roll(10);
+            table.Roll(3);
+            table.Roll(5);
+
+            Assert.That(table.TotalScore, Is.EqualTo(49));
+        }
     }
 }
